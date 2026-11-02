@@ -1,0 +1,7 @@
+app: hello
+group: product
+environments:
+  - env: latest
+    valueFiles: [values.latest.yaml]
+  - env: staging
+    valueFiles: [values.staging.yaml]
