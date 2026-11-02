@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-reader
+spec:
+  selector:
+    matchLabels: { app: {{ .Release.Name }}-reader }
+  template:
+    metadata:
+      labels: { app: {{ .Release.Name }}-reader }
+    spec:
+      containers:
+        - name: reader
+          image: busybox:stable
+          command: ["sh", "-c", "echo \"$MESSAGE\"; sleep 3600"]
+          env:
+            - name: MESSAGE
+              valueFrom:
+                secretKeyRef: { name: hello-message, key: message }
